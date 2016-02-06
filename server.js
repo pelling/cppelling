@@ -37,14 +37,14 @@ var SampleApp = function() {
     /**
      *  Populate the cache.
      */
-    self.populateCache = function() {
-        if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
-        }
+     self.populateCache = function() {
+         if (typeof self.zcache === "undefined") {
+             self.zcache = { 'app.html': '' };
+         }
 
-        //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./index.html');
-    };
+         //  Local cache for static content.
+         self.zcache['app.html'] = fs.readFileSync('./public/app.html');
+     };
 
 
     /**
@@ -102,7 +102,7 @@ var SampleApp = function() {
 
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
+            res.send(self.cache_get('app.html') );
         };
     };
 
@@ -114,6 +114,11 @@ var SampleApp = function() {
     self.initializeServer = function() {
         self.createRoutes();
         self.app = express.createServer();
+
+
+        self.app.use(express.static(__dirname + '/public'));
+
+
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
@@ -156,4 +161,3 @@ var SampleApp = function() {
 var zapp = new SampleApp();
 zapp.initialize();
 zapp.start();
-
