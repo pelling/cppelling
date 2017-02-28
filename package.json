@@ -14,7 +14,7 @@
     "url": "http://www.openshift.com/"
   },
   "scripts": {
-    "start": "nodejs server.js"
+    "start": "node server.js"
   },
   "homepage": "http://www.openshift.com/",
   "repository": {
